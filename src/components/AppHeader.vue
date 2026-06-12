@@ -3,18 +3,36 @@
         name: 'AppHeader',
         props: {
             dataLoaded: Boolean,
-            enrichment: Object
+            enrichment: Object,
+            currentView: String // <-- ДОБАВЛЯЕМ PROP
         },
-        emits: ['export', 'export-compact', 'reset']
+        emits: ['export', 'export-compact', 'reset', 'change-view'] // <-- ДОБАВЛЯЕМ EMIT
     }
 </script>
 
 <template>
     <header class="bg-white shadow-md p-3 z-20 shrink-0">
         <div class="flex justify-between items-center h-10">
-            <h1 class="text-lg font-bold text-blue-600 flex items-center gap-2 shrink-0">
+            <h1 class="text-lg font-bold text-blue-600 flex items-center gap-4 shrink-0">
                 🚀 Log Analytics Pro
+                
+                <!-- ПЕРЕКЛЮЧАТЕЛЬ ВИДОВ -->
+                <div v-if="dataLoaded" class="flex bg-gray-100 p-1 rounded-lg">
+                    <button 
+                        @click="$emit('change-view', 'map')" 
+                        :class="currentView === 'map' ? 'bg-white shadow-sm text-blue-600' : 'text-gray-500'" 
+                        class="px-3 py-1 text-xs font-bold rounded transition">
+                        🗺️ Карта
+                    </button>
+                    <button 
+                        @click="$emit('change-view', 'dashboard')" 
+                        :class="currentView === 'dashboard' ? 'bg-white shadow-sm text-blue-600' : 'text-gray-500'" 
+                        class="px-3 py-1 text-xs font-bold rounded transition">
+                        📊 Дашборд
+                    </button>
+                </div>
             </h1>
+            
             <div class="flex items-center gap-3">
                 <button v-if="dataLoaded" @click="$emit('export')" class="flex items-center gap-1 text-xs font-bold bg-green-50 text-green-700 border border-green-200 px-3 py-1.5 rounded hover:bg-green-100 transition">
                     <span>💾</span> Скачать оригинал (JSON)
