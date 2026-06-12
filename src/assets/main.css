@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Глобальные стили скроллбара */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #f1f1f1; }
+::-webkit-scrollbar-thumb { background: #ccc; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #999; }
+
+/* Стили для Leaflet, которые нужны глобально или внутри компонента */
+.leaflet-popup-content-wrapper { border-radius: 0.5rem; padding: 0; overflow: hidden; }
+.leaflet-popup-content { margin: 0; width: 300px !important; }
+
+/* Маркеры карты */
+.custom-div-icon { background: transparent; border: none; }
+.marker-pin {
+    width: 24px; height: 24px; border-radius: 50%;
+    border: 2px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+    transition: transform 0.2s;
+}
+.marker-pin:hover { transform: scale(1.2); z-index: 1000; }
+
+.pulse { animation: pulse-animation 2s infinite; }
+@keyframes pulse-animation {
+    0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
